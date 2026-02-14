@@ -1,6 +1,3 @@
-upload-keystore.jks
-key.properties
-
 # Miscellaneous
 *.class
 *.log
@@ -35,6 +32,8 @@ migrate_working_dir/
 .pub/
 /build/
 /coverage/
+upload-keystore.jks
+key.properties
 
 # Symbolication related
 app.*.symbols
