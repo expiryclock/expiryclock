@@ -44,6 +44,15 @@ flutter pub get
 
 - pubspec.yaml에 패키지를 추가한 후에 설치하려면 위 명령어를 실행하면 됨
 
+### 앱 아이콘 변경 적용하는 방법
+```
+flutter pub run flutter_launcher_icons
+```
+
+- 앱 아이콘을 변경한 후에 적용하려면 위 명령어를 실행해야 함
+- flutter_launcher_icons.yaml 파일에 아이콘 설정이 정의되어 있어야 함
+- 현재 Android와 iOS만 아이콘 생성되도록 설정됨 (web, windows, macos는 `generate: false`)
+
 ## Screens
 
 - Splash → Camera (default)
