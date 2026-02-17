@@ -48,12 +48,30 @@ flutter config --jdk-dir "D:\java\jdk-17.0.0.1"
 - `GRADLE_USER_HOME` 환경 변수의 경로 내에 `gradle.properties` 파일을 생성합니다.
   - 만약, 별도의 경로를 설정하지 않았다면, `C:\Users\<사용자>\.gradle`경로에 해당 파일 생성합니다.
 - 아래의 내용을 추가하여 Java 버전을 직접 지정합니다.
-  ```
-  org.gardle.java.home=D:\\java\\jdk-17.0.0.1
-  ```
+```
+org.gardle.java.home=D:\\java\\jdk-17.0.0.1
+```
 - 위의 Java 버전을 별도로 지정하지 않았다면 설정할 필요가 없습니다.
+##### 1-2. IDE 설정 (VSCode)
+- VSCode를 사용할 경우, 해당 workspace내의 `.vscode/settings.json` 파일 내에 다음의 내용을 추가합니다.
+- IDE가 직접 지정한 jdk 버전을 인식하기 위함입니다.
+```
+{
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "D:/java/jdk-17.0.0.1",
+      "default": true
+    }
+  ],
+  "terminal.integrated.env.windows": {
+    "JAVA_HOME": "D:/java/jdk-17.0.0.1",
+    "PATH": "D:/java/jdk-17.0.0.1/bin;${env:PATH}"
+  }
+}
+```
 
-### 2. 패키지 설치
+#### 2. 패키지 설치
 
 ```
 flutter pub get
