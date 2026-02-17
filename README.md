@@ -2,6 +2,11 @@
 
 만료기한 관리 앱
 
+## 프로젝트 버전
+
+- **Java 17**  
+  Flutter 개발 시 Java 17 버전이 권장됩니다.
+
 ## 프로젝트 구조
 
 ```
@@ -28,54 +33,51 @@ lib/
 
 ## 개발 가이드
 
-### 데이터 모델 빌드 하는 방법
+### 개발 환경 설정
+
+#### 1. Java 버전 지정 (권장)
+
+```
+flutter config --jdk-dir "D:\java\jdk-17.0.0.1"
+```
+
+- Java 버전을 직접 지정하는 것을 권장합니다.
+- 지정하지 않으면 `JAVA_HOME` 환경 변수의 경로를 기본으로 참고합니다.
+
+##### 1-1. Gradle에서 Java 버전 지정
+- `GRADLE_USER_HOME` 환경 변수의 경로 내에 `gradle.properties` 파일을 생성합니다.
+  - 만약, 별도의 경로를 설정하지 않았다면, `C:\Users\<사용자>\.gradle`경로에 해당 파일 생성합니다.
+- 아래의 내용을 추가하여 Java 버전을 직접 지정합니다.
+  ```
+  org.gardle.java.home=D:\\java\\jdk-17.0.0.1
+  ```
+- 위의 Java 버전을 별도로 지정하지 않았다면 설정할 필요가 없습니다.
+
+### 2. 패키지 설치
+
+```
+flutter pub get
+```
+
+- 개발 중에 pubspec.yaml에 패키지를 추가한 경우에도 위 명령어를 실행해야 합니다.
+
+### 개발 공통 작업
+
+#### 데이터 모델 빌드
 
 ```
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-- 충돌나면 깔끔하게 지우고 빌드하게끔 명령어 실행
-- .g.dart 만들기 위해서는 빌드하고자 하는 파일에 해당 파일명.g.dart가 import 되어 있어야 함
-
-### 패키지 추가 후 설치하는 방법
-```
-flutter pub get
-```
-
-- pubspec.yaml에 패키지를 추가한 후에 설치하려면 위 명령어를 실행하면 됨
+- 충돌나면 깔끔하게 지우고 빌드하게끔 명령어 실행합니다.
+- .g.dart 만들기 위해서는 빌드하고자 하는 파일에 해당 파일명.g.dart가 import 되어 있어야 합니다.
 
 ### 앱 아이콘 변경 적용하는 방법
+
 ```
 flutter pub run flutter_launcher_icons
 ```
 
-- 앱 아이콘을 변경한 후에 적용하려면 위 명령어를 실행해야 함
-- flutter_launcher_icons.yaml 파일에 아이콘 설정이 정의되어 있어야 함
-- 현재 Android와 iOS만 아이콘 생성되도록 설정됨 (web, windows, macos는 `generate: false`)
-
-## Screens
-
-- Splash → Camera (default)
-- Capture Review (after taking a photo)
-- Item List
-- Item Detail/Edit
-
-## Notes
-
-- Camera/OCR/Notifications are stubs. Buttons simulate the behavior and generate mock data.
-- Data is stored in-memory and resets on hot restart.
-- No external packages are used to keep setup minimal.
-
-## Run
-
-1. Ensure Flutter SDK is installed.
-2. If this folder wasn't created by `flutter create`, generate platform folders:
-   - `flutter create .`
-3. Get packages: `flutter pub get`
-4. Run: `flutter run`
-
-## Next Steps (handoff)
-
-- Replace stubs in `lib/services/*` with real implementations.
-- Swap repository to local storage or remote API.
-- Hook local push notifications.
+- 앱 아이콘을 변경한 후에 적용하려면 위 명령어를 실행해야 합니다.
+- flutter_launcher_icons.yaml 파일에 아이콘 설정이 정의되어 있어야 합니다.
+- 현재 Android와 iOS만 아이콘 생성되도록 설정됩니다. (web, windows, macos는 `generate: false`)
