@@ -4,6 +4,7 @@ import 'package:expiryclock/core/data/item_repository.dart';
 import 'package:expiryclock/core/models/expiry_item.dart';
 import 'package:expiryclock/screens/item_screens/services/item_list_service.dart';
 import 'package:expiryclock/screens/item_screens/constants/sort_option.dart';
+import 'package:expiryclock/screens/item_screens/widgets/sort_options_bottom_sheet.dart';
 
 class ItemListScreen extends ConsumerStatefulWidget {
   const ItemListScreen({super.key});
@@ -53,38 +54,13 @@ class _ItemListScreenState extends ConsumerState<ItemListScreen> {
   void _showSortOptions() {
     showModalBottomSheet(
       context: context,
-      builder: (context) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                '정렬 기준',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-              ),
-            ),
-            const Divider(height: 1),
-            ...SortOption.values.map((option) {
-              final isSelected = _currentSortOption == option;
-              return ListTile(
-                title: Text(option.displayName),
-                trailing: isSelected
-                    ? const Icon(Icons.check, color: Colors.blue)
-                    : null,
-                selected: isSelected,
-                onTap: () {
-                  setState(() {
-                    _currentSortOption = option;
-                  });
-                  Navigator.pop(context);
-                },
-              );
-            }),
-          ],
-        ),
+      builder: (context) => SortOptionsBottomSheet(
+        currentSortOption: _currentSortOption,
+        onSortOptionSelected: (option) {
+          setState(() {
+            _currentSortOption = option;
+          });
+        },
       ),
     );
   }
