@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:expiryclock/core/data/item_repository.dart';
 import 'package:expiryclock/core/models/expiry_item.dart';
 import 'package:expiryclock/screens/item_screens/services/item_list_service.dart';
-import 'package:expiryclock/screens/item_screens/models/sort_option.dart';
+import 'package:expiryclock/screens/item_screens/constants/sort_option.dart';
 
 class ItemListScreen extends ConsumerStatefulWidget {
   const ItemListScreen({super.key});

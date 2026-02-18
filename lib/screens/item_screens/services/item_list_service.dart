@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 // internal
 import 'package:expiryclock/core/models/expiry_item.dart';
 import 'package:expiryclock/core/data/item_repository.dart';
-import 'package:expiryclock/screens/item_screens/models/sort_option.dart';
+import 'package:expiryclock/screens/item_screens/constants/sort_option.dart';
 
 /// 아이템 리스트 화면의 비즈니스 로직을 담당하는 서비스
 class ItemListService {
