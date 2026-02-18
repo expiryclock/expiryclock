@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 // internal
 import 'package:expiryclock/core/models/expiry_item.dart';
 import 'package:expiryclock/core/data/item_repository.dart';
+import 'package:expiryclock/screens/item_screens/models/sort_option.dart';
 
 /// 아이템 리스트 화면의 비즈니스 로직을 담당하는 서비스
 class ItemListService {
@@ -17,8 +18,50 @@ class ItemListService {
   ValueNotifier<int> get versionNotifier => _repository.version;
 
   /// 모든 아이템을 가져옵니다
-  List<ExpiryItem> getAllItems() {
-    return _repository.getAll();
+  List<ExpiryItem> getAllItems({SortOption? sortOption}) {
+    final items = _repository.getAll();
+
+    if (sortOption == null) {
+      return items;
+    }
+
+    return _sortItems(items, sortOption);
+  }
+
+  /// 아이템 리스트를 정렬합니다
+  List<ExpiryItem> _sortItems(List<ExpiryItem> items, SortOption sortOption) {
+    final sortedItems = List<ExpiryItem>.from(items);
+
+    switch (sortOption) {
+      case SortOption.expiryDateAsc:
+        sortedItems.sort(
+          (a, b) => a.expiryDateMillis.compareTo(b.expiryDateMillis),
+        );
+        break;
+      case SortOption.expiryDateDesc:
+        sortedItems.sort(
+          (a, b) => b.expiryDateMillis.compareTo(a.expiryDateMillis),
+        );
+        break;
+      case SortOption.nameAsc:
+        sortedItems.sort((a, b) => a.name.compareTo(b.name));
+        break;
+      case SortOption.nameDesc:
+        sortedItems.sort((a, b) => b.name.compareTo(a.name));
+        break;
+      case SortOption.registeredDateDesc:
+        sortedItems.sort(
+          (a, b) => b.registeredAtMillis.compareTo(a.registeredAtMillis),
+        );
+        break;
+      case SortOption.registeredDateAsc:
+        sortedItems.sort(
+          (a, b) => a.registeredAtMillis.compareTo(b.registeredAtMillis),
+        );
+        break;
+    }
+
+    return sortedItems;
   }
 
   /// 아이템을 삭제합니다

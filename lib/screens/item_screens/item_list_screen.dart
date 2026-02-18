@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:expiryclock/core/data/item_repository.dart';
 import 'package:expiryclock/core/models/expiry_item.dart';
-import 'package:expiryclock/screens/item_management/services/item_list_service.dart';
+import 'package:expiryclock/screens/item_screens/services/item_list_service.dart';
+import 'package:expiryclock/screens/item_screens/models/sort_option.dart';
 
 class ItemListScreen extends ConsumerStatefulWidget {
   const ItemListScreen({super.key});
@@ -14,6 +15,7 @@ class ItemListScreen extends ConsumerStatefulWidget {
 class _ItemListScreenState extends ConsumerState<ItemListScreen> {
   late final ItemListService _service;
   late final ValueNotifier<int> _versionNotifier;
+  SortOption _currentSortOption = SortOption.expiryDateAsc;
 
   @override
   void initState() {
@@ -41,20 +43,64 @@ class _ItemListScreenState extends ConsumerState<ItemListScreen> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('이미지를 불러오는데 실패했습니다: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('이미지를 불러오는데 실패했습니다: $e')));
       }
     }
   }
 
+  void _showSortOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                '정렬 기준',
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+            const Divider(height: 1),
+            ...SortOption.values.map((option) {
+              final isSelected = _currentSortOption == option;
+              return ListTile(
+                title: Text(option.displayName),
+                trailing: isSelected
+                    ? const Icon(Icons.check, color: Colors.blue)
+                    : null,
+                selected: isSelected,
+                onTap: () {
+                  setState(() {
+                    _currentSortOption = option;
+                  });
+                  Navigator.pop(context);
+                },
+              );
+            }),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final items = _service.getAllItems();
+    final items = _service.getAllItems(sortOption: _currentSortOption);
     return Scaffold(
       appBar: AppBar(
         title: const Text('아이템 리스트'),
         actions: [
+          IconButton(
+            onPressed: _showSortOptions,
+            icon: const Icon(Icons.sort),
+            tooltip: '정렬',
+          ),
           IconButton(
             onPressed: _pickImageFromGallery,
             icon: const Icon(Icons.photo_library_outlined),

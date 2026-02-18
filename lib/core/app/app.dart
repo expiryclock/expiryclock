@@ -4,9 +4,9 @@ import 'package:camera/camera.dart';
 
 // internal
 import 'package:expiryclock/screens/camera/camera_screen.dart';
-import 'package:expiryclock/screens/item_management/item_register_screen.dart';
-import 'package:expiryclock/screens/item_management/item_list_screen.dart';
-import 'package:expiryclock/screens/item_management/item_detail_screen.dart';
+import 'package:expiryclock/screens/item_screens/item_register_screen.dart';
+import 'package:expiryclock/screens/item_screens/item_list_screen.dart';
+import 'package:expiryclock/screens/item_screens/item_detail_screen.dart';
 import 'package:expiryclock/screens/settings/settings_screen.dart';
 import 'package:expiryclock/core/models/expiry_item.dart';
 import 'package:expiryclock/core/constants/start_screen.dart';

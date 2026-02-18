@@ -5,9 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // internal
 import 'package:expiryclock/core/models/expiry_item.dart';
 import 'package:expiryclock/core/data/item_repository.dart';
-import 'package:expiryclock/screens/item_management/widgets/item_image_widgets.dart';
-import 'package:expiryclock/screens/item_management/widgets/item_form_fields.dart';
-import 'package:expiryclock/screens/item_management/services/item_detail_service.dart';
+import 'package:expiryclock/screens/item_screens/widgets/item_image_widgets.dart';
+import 'package:expiryclock/screens/item_screens/widgets/item_form_fields.dart';
+import 'package:expiryclock/screens/item_screens/services/item_detail_service.dart';
 
 class ItemDetailScreen extends ConsumerStatefulWidget {
   const ItemDetailScreen({super.key, this.item});
