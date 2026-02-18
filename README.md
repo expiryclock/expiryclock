@@ -90,12 +90,21 @@ flutter pub run build_runner build --delete-conflicting-outputs
 - 충돌나면 깔끔하게 지우고 빌드하게끔 명령어 실행합니다.
 - .g.dart 만들기 위해서는 빌드하고자 하는 파일에 해당 파일명.g.dart가 import 되어 있어야 합니다.
 
-### 앱 아이콘 변경 적용하는 방법
+#### 앱 아이콘 변경 적용하는 방법
 
 ```
 flutter pub run flutter_launcher_icons
 ```
 
 - 앱 아이콘을 변경한 후에 적용하려면 위 명령어를 실행해야 합니다.
-- flutter_launcher_icons.yaml 파일에 아이콘 설정이 정의되어 있어야 합니다.
+- `flutter_launcher_icons.yaml` 파일에 아이콘 설정이 정의되어 있어야 합니다.
 - 현재 Android와 iOS만 아이콘 생성되도록 설정됩니다. (web, windows, macos는 `generate: false`)
+
+#### 스플래쉬 화면 적용하는 방법
+
+```
+flutter pub run flutter_native_splash:create
+```
+
+- 스플래쉬 화면을 변경한 후에 적용하려면 위 명령어를 실행해야 합니다.
+- `pubspec.yaml`파일에 `flutter_native_splash`가 정의되어 있어야 합니다.
